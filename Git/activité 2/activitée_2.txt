@@ -1,0 +1,14 @@
+1 - Qu'est-ce qu'un commit ?
+
+Un commit c'est une façon d'enregistrer des modifications faites dans notre repository en y ajoutant un message d'explication sur les changements qui ont été faits. Chaque commit contient une clé (identifiant) propre permettant de le retrouver a l'avenir, pour y retourner si un commit futur pose problème par exemple.
+En plus de son identifiant propre, un commit contient le nom de l'utilisateur qui a fait ce commit et un message d'explication sur ce commit. Le message doit être le plus explicite possible pour permettre au développeur de s'y retrouver plus tard.
+
+2 - À quoi sert la commande git log ?
+
+Le git log sert à voir une liste de tous les commits faits sur ce repository, celà permet de retrouver les auteurs des anciens commits ou de voir les étapes des modifications faite au projet. (étapes qui aurons été commit évidemment)
+Cette commande est pratique car elle nous donne un aperçut sur l'auteur, le message et elle nous donne l'identifiant de chaques commit, ce qui nous permettra de retourner dans un commit passé si par exemple nous avons un problème avec le projet depuis le dernier commit.
+
+3 - Qu'est-ce qu'une branche ?
+
+Une branche c'est comme un autre chemin dans le projet. En effet, dans le cas ou nous voulons faire un test ou ajouter une fonctionnalité bien particulière, la création d'un branche permet de ne pas travailler sur la branche 'master' et donc d'éviter des soucis si notre nouvelle fonctionnalité ne marche pas comme prévu. Il nous est ensuite possible, si les modifications nous conviennent, de fusionner la branche fraichement créee avec la branche master pour que le projet soit a jour sur la branche principale.
+L'utilisation de branches est quasi indispensable si plusieurs développeurs travaillent sur un même projet, celà empêche des possibles conflits.

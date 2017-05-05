@@ -1,0 +1,75 @@
+Un pointeur, c'est une variable qui contiendra l'adresse d'une autre variable, il permettra donc de pouvoir modifier cette variable à distance. En effet,
+si je créer une fonction qui a pour but de modifier une variable du main passée en paramètre, il ne pourra le faire qu'en connaissant l'adresse de la "vrai" variable présente dans le main car la variable passée en paramètre d'une fonction est une copie de celle présente dans le main.
+
+Par exemple, dans le main je créer une variable qui contiendra un "age" (int age = 42;) je passe ensuite cette variable a une fonction qui devra changer cet age en 24,
+il ne pourra le faire que dans le scope de la fonction. En affichant de nouveau la variable age dans le main après cet appel de fonction, la variable vaudra toujours 42. Pour comprendre ça c'est simple il suffit de savoir que la variable age envoyée a la fonction ne peux être modifié par cette fonction sauf si cette fonction retourne la valeur pour qu'elle soit ensuite utilisée dans le main (exemple dans la fonction: age = 24; return age;) en affectant le retour de la fonction a la variable age dans le main elle contiendra cette fois ci la bonne valeur (24).
+
+
+void	fonction(int age)
+{
+	age = 24;  // ICI ON MODIFIE UNE COPIE DE LA VARIABLE AGE QUI SERA DETRUITE A LA FIN DE LA FONCTION
+}
+
+int		main()
+{
+	int age = 42; 		// ICI ON CREER UNE VARIABLE AGE DE VALEUR 42
+	fonction(age);		// ICI ON ENVOI LA VALEUR 42 A LA FONCTION
+	printf("%d", age);	// ICI ON AFFICHERA LA VALEUR 42 CAR LA FONCTION N'A RIEN FAIT A LA VARIABLE AGE POUR LE MAIN MAIS A MODIFIE UNE COPIE QUI N'EXISTE PLUS
+	return 0;
+}
+
+
+Pour pouvoir modifier la valeur d'une variable dans un autre scope (a distance) il faudra créer un pointeur sur cette variable, le pointeur contiendra donc l'adresse de cette variable, ce qui permettera a la fonction de savoir où trouver la valeur a modifier.
+
+
+void	fonction(int *ptr)
+{
+	*ptr = 24;  // ICI ON MODIFIE LE NOMBRE CONTENU A L'ADRESSE *PTR, QUI CONTENAIS 42 MAIS MAINTENANT CONTIEN 24
+}
+
+int		main()
+{
+	int age = 42; 		// ICI ON CREER UNE VARIABLE AGE DE VALEUR 42
+	int *ptr = &age;	// ICI ON CREER UN POINTEUR SUR AGE QUI PERMETTRA LA MODIFICATION A DISTANCE
+	fonction(ptr);		// ICI ON ENVOI LE POINTEUR A LA FONCTION (DONC L'ADRESSE OU EST CONTENU L'AGE)
+	printf("%d", age);	// ICI ON AFFICHERA LA VALEUR 24 CAR LA FONCTION A ETE VOIR A L'ADRESSE MEMOIRE DE LA VARIABLE AGE ET EN A MODIFIER LE CONTENU
+	return 0;
+}
+
+
+Nous pourrions même créer un int ***ptr3 qui pointerais sur un pointeur qui pointerais sur un autre pointeur qui pointerais sur la variable age. Nous changerions donc la valeur de la variable age en passant par plusieurs adresses aboutissant au même résultat a savoir, changer la valeur contenue au bout de ces adresses.
+
+
+void	fonction(int ***ptr3)
+{
+	***ptr3 = 24;  // ICI ON MODIFIE LE NOMBRE CONTENU A L'ADRESSE ***PTR3, QUI CONTENAIS 42 MAIS MAINTENANT CONTIEN 24
+}
+
+int		main()
+{
+	int age = 42; 			// ICI ON CREER UNE VARIABLE AGE DE VALEUR 42
+	int *ptr = &age;		// ICI ON CREER UN POINTEUR SUR AGE QUI PERMETTRA LA MODIFICATION A DISTANCE
+	int **ptr2 = &ptr;		// ICI ON CREER UN POINTEUR QUI CONTIENDRA L'ADRESSE DU POINTEUR SUR AGE 
+	int ***ptr3 = &ptr2;	// ICI ON CREER UN POINTEUR QUI CONTIENDRA L'ADRESSE DU POINTEUR QUI POINTE SUR LE POINTEUR QUI POINTE SUR AGE (C'EST PAS CLAIR ?)
+	fonction(ptr3);			// ICI ON ENVOI LE POINTEUR DE POINTEUR DE POINTEUR A LA FONCTION (DONC L'ADRESSE OU EST CONTENU L'AGE)
+	printf("%d", age);		// ICI ON AFFICHERA LA VALEUR 24 CAR LA FONCTION A ETE VOIR A L'ADRESSE MEMOIRE DE LA VARIABLE AGE ET EN A MODIFIER LE CONTENU
+	return 0;
+}
+
+
+Au final ce qu'il faut comprendre c'est qu'une variable est modifiable tant que l'on reste dans le scope qui lui est attribué. Un fonction distante n'a pas accès a ce scope il faudra donc lui indiquer l'adresse de ce que l'on veut modifier pour qu'il puisse simplement le trouver en mémoire et le modifier en conséquence.
+
+Pour conclure il nous ai possible d'afficher le contenu d'age en passant par ses différents pointeurs :
+
+
+int		main()
+{
+	int age = 42;
+	int *ptr = &age;
+	int **ptr2 = &ptr;
+	int ***ptr3 = &ptr2;
+	printf("%d", ***ptr3); // CECI AFFICHERA BIEN 42
+	return 0;
+}
+
+Les pointeurs servent donc a garder en mémoire l'adresse d'une autre variable dans le but de s'en servir a distance.

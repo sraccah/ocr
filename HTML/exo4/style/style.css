@@ -1,0 +1,94 @@
+@font-face
+{
+    font-family: 'LearningCurveProRegular';
+    src: url('../font/LearningCurve_OT-webfont.eot');
+    src: url('../font/LearningCurve_OT-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/LearningCurve_OT-webfont.woff') format('woff'),
+         url('../font/LearningCurve_OT-webfont.ttf') format('truetype'),
+         url('../font/LearningCurve_OT-webfont.svg#LearningCurveProRegular') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+html
+{
+	height: 100%;
+}
+
+body
+{
+	background-image: url("../img/neige.jpeg");
+	height: 100%;
+    margin: 0;
+}
+
+h1
+{
+	font-family: 'LearningCurveProRegular', Arial, serif;
+	font-size: 50px;
+}
+
+.intro
+{
+	text-align: center;
+	text-shadow: 0.5px 0.5px 1px black;
+}
+
+h2
+{
+	color: darkred;
+}
+	
+#photo
+{
+	margin-right: 1%;
+	float: right;
+	border: 1px solid black;
+	box-shadow: 2px 2px 4px black;
+	width: 106px;
+	height: 128px;
+}
+
+@media all and (min-width: 1024px)
+{
+	#liseret
+	{
+		width: 10%;
+	    min-height: 100%;
+		background-color: grey;
+		float: left;
+		margin-right: 1%;
+	}
+
+	#page
+	{
+		overflow: hidden;
+	}
+
+	section
+	{
+		display: inline-block;
+		margin-top: 5%;
+	}
+
+	#exp
+	{
+		width: 25%;
+		height: 100%;
+		float: left;
+	}
+
+	#comp
+	{
+		width: 25%;
+		height: 100%;
+		margin-left: 10%;
+	}
+
+	#form
+	{
+		width: 25%;
+		height: 100%;
+		float: right;
+	}
+}
